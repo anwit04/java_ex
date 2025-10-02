@@ -1,0 +1,57 @@
+import java.io.IOException;
+
+public class FindSingleDigitInArray {
+    public static void main(String[] args) throws IOException {
+        int[] numberString = new int[100];
+        int len1 = 0;
+
+        System.out.print("Enter the number string: ");
+        while (len1 < 100) {
+            int input = System.in.read();
+            if (input == -1 || input == '\n') {
+                break;
+            }
+            if (input >= '0' && input <= '9') {
+                numberString[len1++] = input - '0';
+            }
+        }
+
+        System.out.print("Enter the single digit to find: ");
+        int digitToFind = -1;
+        while (true) {
+            int input = System.in.read();
+            if (input == -1 || input == '\n') {
+                break;
+            }
+            if (input >= '0' && input <= '9') {
+                digitToFind = input - '0';
+                // Ignore any extra inputs beyond first digit
+                while ((input = System.in.read()) != -1 && input != '\n') {
+                    // just consume extra chars silently
+                }
+                break;
+            }
+        }
+
+        if (digitToFind == -1) {
+            System.out.println("No valid digit entered to find.");
+            return;
+        }
+
+        // Search for all occurrences of digitToFind
+        boolean found = false;
+        System.out.print("Digit " + digitToFind + " found at position(s): ");
+        for (int i = 0; i < len1; i++) {
+            if (numberString[i] == digitToFind) {
+                System.out.print(i + " ");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Digit " + digitToFind + " not found.");
+        } else {
+            System.out.println();
+        }
+    }
+}
